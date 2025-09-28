@@ -1,6 +1,6 @@
 <h1>ExpNo 5 : Implement Simple Hill Climbing Algorithm</h1> 
-<h3>Name:             </h3>
-<h3>Register Number:             </h3>
+<h3>Name: KISHORE G         </h3>
+<h3>Register Number: 212223040099          </h3>
 <H3>Aim:</H3>
 <p>Implement Simple Hill Climbing Algorithm and Generate a String by Mutating a Single Character at each iteration </p>
 <h2> Theory: </h2>
@@ -54,8 +54,64 @@ Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
 ....................................................<br>
 ..................................................<br>
 ................................................<br>
+
 Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 0  Solution :  Artificial Intelligence<br>
+
+## PROGRAM
+~~~
+import random
+import string
+
+def generate_random_solution(answer):
+    l = len(answer)
+    allowed_chars = string.ascii_letters + string.digits + string.punctuation + " "
+    return [random.choice(allowed_chars) for _ in range(l)]
+
+def evaluate(solution, answer):
+    target = list(answer)
+    diff = 0
+    for i in range(len(target)):
+        s = solution[i]
+        t = target[i]
+        diff += abs(ord(s) - ord(t))
+    return diff
+
+def mutate_solution(solution):
+    allowed_chars = string.ascii_letters + string.digits + string.punctuation + " "
+    ind = random.randint(0, len(solution) - 1)
+    solution[ind] = random.choice(allowed_chars)
+    return solution
+
+def SimpleHillClimbing():
+    answer = "Artificial Intelligence"
+    best = generate_random_solution(answer)
+    best_score = evaluate(best, answer)
+    max_iterations = 10
+    iterations = 0
+
+    while True:
+        print("Score:", best_score, "Solution:", "".join(best))
+        if best_score == 0:
+            break
+        if iterations >= max_iterations:
+            print("Max iterations reached. Best solution:", "".join(best))
+            break
+        new_solution = mutate_solution(list(best))
+        score = evaluate(new_solution, answer)
+        if score < best_score:
+            best = new_solution
+            best_score = score
+        iterations += 1
+
+SimpleHillClimbing()
+
+~~~
+## OUPUT
+<img width="1415" height="368" alt="image" src="https://github.com/user-attachments/assets/cbd42112-748f-46d3-859e-38aa8d26edeb" />
+
+## RESULT 
+The Simple Hill Climbing algorithm successfully generated the target string "Artificial Intelligence" by iteratively mutating and improving the solution based on heuristic evaluation.
